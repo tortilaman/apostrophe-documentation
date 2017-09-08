@@ -324,7 +324,9 @@ Do not call this yourself, it is called
 by .update(). You will usually want to call the
 update method of the appropriate doc type manager instead:
 
+```javascript
 self.apos.docs.getManager(doc.type).update(...)
+```
 
 You may override this method to change the implementation.
 ### insertBody(*req*, *doc*, *options*, *callback*) *[api]*
@@ -332,7 +334,7 @@ Insert the given document. Called by `.insert()`. You will usually want to
 call the update method of the appropriate doc type manager instead:
 
 ```javascript
-self.apos.docs.getManager(doc.type).update(...)
+self.apos.docs.getManager(doc.type).insert(...)
 ```
 
 However you can override this method to alter the
