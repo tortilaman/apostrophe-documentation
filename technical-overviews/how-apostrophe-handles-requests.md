@@ -43,7 +43,7 @@ As mentioned, every page type is managed by a module that extends `apostrophe-cu
 
 For instance, you might implement a module that displays an index if you request its URL exactly, and displays an individual document if you match the URL of the page plus the slug of the document:
 
-```
+```javascript
 // in app.js
 modules: {
   'home-pages': {}
@@ -123,7 +123,7 @@ module.exports = {
 }
 ```
 
-```
+```markup
 {# in any template #}
 {{ apos.clap(data.page.title) }}
 ```
@@ -154,7 +154,7 @@ module.exports = {
 
 If you need to, you can access `req` inside a helper function as:
 
-```
+```javascript
 self.apos.templates.contextReq
 ```
 
@@ -173,7 +173,7 @@ self.addHelpers({
 });
 ```
 
-```
+```markup
 {# inside any template #}
 {% for piece in data.pieces %}
   {{ address(piece) }}
@@ -197,4 +197,4 @@ self.apos.app.get('/special-url', function(req, res) {
 
 Note that `pageBeforeSend` methods are invoked first before the template is rendered.
 
-  `sendPage` completes your response to the Express request. There is no need to call `res.send` afterards and it will not work if you try. If you need to do anything special to the Express `res` object before the response is sent, do that first, accessing it via `req.res`.
+  `sendPage` completes your response to the Express request. There is no need to call `res.send` afterwards and it will not work if you try. If you need to do anything special to the Express `res` object before the response is sent, do that first, accessing it via `req.res`.

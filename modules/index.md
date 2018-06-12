@@ -38,11 +38,13 @@ children:
   - apostrophe-pieces
   - apostrophe-pieces-pages
   - apostrophe-pieces-widgets
+  - apostrophe-polymorphic-manager
   - apostrophe-push
   - apostrophe-rich-text-widgets
   - apostrophe-schemas
   - apostrophe-search
   - apostrophe-service-bridge
+  - apostrophe-soft-redirects
   - apostrophe-tags
   - apostrophe-tasks
   - apostrophe-templates

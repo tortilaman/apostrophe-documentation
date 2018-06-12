@@ -4,6 +4,9 @@ menu: "Documentation"
 layout: reference
 children:
   - notFoundPage
+  - email
+  - thumbnails-and-areas-of-child-pages
+  - password-reset
   - search
   - admin-bar
   - children-and-joins
@@ -18,7 +21,8 @@ children:
   - storing-images-and-files-in-amazon-s3
   - migration
   - linode
-  - deploying-apostrophe-in-the-cloud
+  - deploying-apostrophe-in-the-cloud-with-heroku
+  - deploying-apostrophe-in-the-cloud-with-aws
   - multicore
   - windows
   - docker
@@ -26,6 +30,7 @@ children:
   - storing-sessions-in-redis
   - google-twitter-and-facebook-login
   - trim-index
+  - hide-index-page
 ---
 
 These HOWTOs cover a variety of topics that don't quite fit neatly into a tutorial series.
