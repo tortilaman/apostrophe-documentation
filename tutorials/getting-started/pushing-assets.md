@@ -81,30 +81,34 @@ This will push the file `lib/modules/apostrophe-assets/public/js/site.js` to the
 
 > Want to use `gulp`, `browserify`, `grunt` and friends? Go for it! Just set up your configuration so that the compiled output file is pushed by Apostrophe. Apostrophe doesn't need to know you are using these tools for you to be successful with them. Separation of concerns is a good thing.
 
-## Including webfonts, images, and other assets
+## Pushing stylesheets and JavaScript from your own modules
 
-> The following isn't necessary (strictly speaking) until you start doing production deployments on a cloud server, but since you'll probably need to put your site online eventually, why not start off on the right foot?
+Later on, when you start creating your own modules, you might want to "push" assets directly from them. When the time comes, check out the [pushAsset](../../modules/apostrophe-module/index.html#push-asset) method, which all modules in Apostrophe provide. This method gives you a powerful way to push assets only if the user is logged in, or all the time. And it allows you to organize your assets with the modules to which they are most relevant.
 
-There's a couple ways you can go about this. We'd recommend creating a theme module as the pathing is more straightforward, but the choice is yours.
+## Theme modules, webfonts, and images.
 
-### Assets in a theme module 
+If you're including static assets in your project other than less and javascript (such as webfonts or images), it's recommended to create a theme module.
 
-When making comprehensive visual changes including css, javascript, web-fonts, and image assets, it's a good idea to create a theme module to all your additions together. Don't forget to push your stylesheets and javascript though, which will be described in the next section.
-
-
-Your `my-theme` module might look something like the following:
+### File Structure:
+Your `my-theme` module goes in `lib/modules`, and might look something like this (you can call the module whatever you want):
 
 ```
 my-theme
-  - public/
-    - css/
-    - fonts/
-    - img/
-    - js/
-  - index.js
+├─┬ public/
+│ ├── css/
+│ ├── fonts/
+│ ├── img/
+│ └── js/
+└── index.js
 ```
 
-In your `my-theme` module, you'll include your assets in `lib/modules/my-theme/public/**`. You'll then reference them in your css and nunjucks templates at `modules/my-theme/**`.
+### Configuring the module:
+You'll need to configure your theme module so it knows to look for any less or javascript files, because otherwise none of your styles will be included. You'll have to add it to your `app.js` file, and tell the module to look for your less and javascript files. An example is in the [apostrophe-samples](https://github.com/apostrophecms/apostrophe-samples/blob/master/lib/modules/theme/index.js) repository.
+
+### Referencing assets in Less and Nunjucks:
+This can be confusing, because the path that your assets reside at isn't the path you should use in your less and nunjucks files.
+
+While the path to your assets is of the form `lib/modules/my-theme/public/**`, the path you'll use in less and nunjucks will be of the form `modules/my-theme/**`.
 
 As an example, with `karla.woff` in `lib/modules/my-theme/public/fonts` the @font-face definition could be as simple as:
 
@@ -117,12 +121,8 @@ As an example, with `karla.woff` in `lib/modules/my-theme/public/fonts` the @fon
 
 > Not working for you yet? Please check out the [complete, working example of a `theme` module in the apostrophe-samples project](https://github.com/apostrophecms/apostrophe-samples). This project is a great place to start if you need more examples of where to put your code "in context" so that everything works!
 
-### Assets in apostrophe-assets
+### Assets in the apostrophe-assets module
 
 When including your assets in any module that comes with Apostrophe you'll run into some unexpected differences compared to using your own module. We'll use `karla.woff` as an example again, this time in `apostrophe-assets`. 
 
 If you included `karla.woff` in `lib/modules/apostrophe-assets/public/fonts`, then in your less files the URL would be `/modules/my-apostrophe-assets/fonts/karla.woff`. The use of `my-` in front of the module name in less allows symbolic links from `public/modules` to differentiate between the npm version of a core Apostrophe module and additions you've made at a project-level. 
-
-## Pushing stylesheets and JavaScript from your own modules
-
-Later on, when you start creating your own modules, you might want to "push" assets directly from them. When the time comes, check out the [pushAsset](../../modules/apostrophe-module/index.html#push-asset) method, which all modules in Apostrophe provide. This method gives you a powerful way to push assets only if the user is logged in, or all the time. And it allows you to organize your assets with the modules to which they are most relevant.
